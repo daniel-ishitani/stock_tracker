@@ -1,11 +1,12 @@
 class StocksController < ApplicationController
     def search
         @stock = Stock.new_from_lookup(params[:stock])
-        if @stock
-            render 'users/my_portfolio'
-        else
-            flash[:error] = 'Ticker not found'
-            redirect_to my_portfolio_path
+        if @stock.nil?
+            flash.now[:error] = 'Ticker not found'
+        end
+        
+        respond_to do |format|
+            format.js {render partial: 'users/result' }
         end
     end
 end
