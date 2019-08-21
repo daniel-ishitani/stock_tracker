@@ -1,0 +1,16 @@
+<h2>User Details</h2>
+
+<dl class='dl-horizontal'>
+    <dt><strong>Name: </strong></dt>
+    <dd><%= @user.full_name %></dd>
+    <dt><strong>Name: </strong></dt>
+    <dd><%= @user.email %></dd>
+</dl>
+
+<% if @user.stocks.any? %>
+    <%= render 'stocks/list'%>
+<% else %>
+    <p class='lead'><%= @user.first_name %> is not tracking any stocks.</p> 
+<% end %>
+
+<%= link_to 'Back', friends_path, class: 'btn btn-primary' %>
